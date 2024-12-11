@@ -24,7 +24,6 @@ func ExecuteHandlerSignIn(c port.MyServer, cfg *configs.Config) {
 		return
 	}
 
-	// เรียกใช้ signIn ของ AuthService
 	httpStatus, response := authService.SignIn(request)
 	c.ToResponse(httpStatus, response.Code, response.Message, response.Data)
 }

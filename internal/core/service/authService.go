@@ -19,7 +19,7 @@ type AuthService struct {
 func NewAuthService(repo port.MyRepo, jwtTokenProvider *authentication.JwtTokenProvider) *AuthService {
 	return &AuthService{
 		repo:             repo,
-		jwtTokenProvider: jwtTokenProvider, // passing pointer here
+		jwtTokenProvider: jwtTokenProvider, // passing pointer
 	}
 }
 
@@ -41,7 +41,7 @@ func (s *AuthService) SignIn(request model.UserLoginRequest) (int, domain.Respon
 			Message: "User not found",
 		}
 	}
-	// ตรวจสอบ password และอื่น ๆ
+	// validate match password
 	if !authentication.MatchPassword(user.Password, request.Password) {
 		return http.StatusUnauthorized, domain.ResponseT[interface{}]{
 			Code:    "I0002",
@@ -62,16 +62,16 @@ func (s *AuthService) Me(accessToken string) (int, domain.ResponseT[interface{}]
 	if err != nil {
 		return 0, domain.ResponseT[interface{}]{}
 	}
-	log.Println("AuthService -> claims:", claims)
-	userId, ok := claims["userId"].(string) // สมมติว่า userId เป็น string
-	if !ok {
-		log.Println("AuthService -> userId not found in claims")
-		return http.StatusUnauthorized, domain.ResponseT[interface{}]{
-			Code:    "I0007",
-			Message: "User ID not found in token.",
-		}
-	}
-	log.Println("AuthService -> userId:", userId)
+	//log.Println("AuthService -> claims:", claims)
+	//userId, ok := claims["userId"].(string)
+	//if !ok {
+	//	log.Println("AuthService -> userId not found in claims")
+	//	return http.StatusUnauthorized, domain.ResponseT[interface{}]{
+	//		Code:    "I0007",
+	//		Message: "User ID not found in token.",
+	//	}
+	//}
+	//log.Println("AuthService -> userId:", userId)
 	return http.StatusOK, domain.ResponseT[interface{}]{
 		Code:    "S0000",
 		Message: "Success",
