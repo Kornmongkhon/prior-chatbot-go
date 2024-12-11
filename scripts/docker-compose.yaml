@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    restart: always
+    container_name: prior-chatbot-postgres
+    environment:
+      POSTGRES_USER: prior_chatbot_app
+      POSTGRES_PASSWORD: prior_chatbot_app_P@SSWORD
+      POSTGRES_DB: prior_chatbot
+      TZ: Asia/Bangkok
+    ports:
+      - "5434:5432"
+
+volumes:
+  postgres_data:
+    driver: local

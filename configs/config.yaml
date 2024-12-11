@@ -1,0 +1,33 @@
+Server:
+  Name: "prior-chatbot"
+  Port: 8080
+  Timeout: 30s
+  TimeZone: "Asia/Bangkok"
+
+Log:
+  Env: dev
+  Level: info
+
+CorsSupport:
+    AllowedOrigins: "*"
+    AllowedMethods: "GET,POST,PUT,DELETE,PATCH"
+    AllowedHeaders: "Authorization, Content-Type, Refresh-Token"
+
+Jwt:
+  Secret: "prior-chatbot-secret"
+  ExpirationAccessToken: 15m
+  ExpirationRefreshToken: 24h
+
+
+Db:
+  Host: "localhost"
+  Port: "5434"
+  Database: "prior_chatbot"
+  Timeout: 10s
+  MaxIdleconns: 100
+  MaxOpenconns: 100
+  MaxLifetime: 30m
+
+Secrets:
+  DbUsername: "prior_chatbot_app"
+  DbPassword: "prior_chatbot_app_P@SSWORD"
