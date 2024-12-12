@@ -14,6 +14,6 @@ CREATE TABLE PC_TI_USER
 );
 
 INSERT INTO PC_TI_USER (EMAIL, PASSWORD, MOBILE, DOB, SEX)
-VALUES ('admin@prior-chatbot','$2a$12$dyyRdvdlUN1b7p9kibwlu.sWgPj5C2o5fzdWuzGyfyPHJPOb5.jyS',
+VALUES ('admin@prior-chatbot.com','$2a$12$dyyRdvdlUN1b7p9kibwlu.sWgPj5C2o5fzdWuzGyfyPHJPOb5.jyS',
         '0812345678','1990-01-01','M');
 -- adminprior-chatbot@PassW0rd = password

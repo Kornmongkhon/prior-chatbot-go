@@ -4,7 +4,9 @@ import (
 	"fmt"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
+	"log"
 	"strings"
+	"time"
 )
 
 var cfg *Config
@@ -53,17 +55,17 @@ func loadConfigs() {
 	_ = viper.Unmarshal(&cfg)
 }
 
-//func setTimeZone(timeZone string) {
-//	location, err := time.LoadLocation(timeZone)
-//	if err != nil {
-//		log.Fatalf("Failed to load location: %v", err)
-//	}
-//	time.Local = location
-//	log.Println("Timezone set to:", timeZone)
-//}
-//func formatTime(t time.Time) string {
-//	return t.Format("2006/01/02 15:04:05")
-//}
+func SetTimeZone(timeZone string) {
+	location, err := time.LoadLocation(timeZone)
+	if err != nil {
+		log.Fatalf("Failed to load location: %v", err)
+	}
+	time.Local = location
+	log.Println("Timezone set to:", timeZone)
+}
+func FormatTime(t time.Time) string {
+	return t.Format("2006/01/02 15:04:05")
+}
 
 //func initDb() {
 //	dataSourceName := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",

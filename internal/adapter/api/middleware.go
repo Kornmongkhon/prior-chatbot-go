@@ -105,6 +105,7 @@ func isAlwaysAllowEndPoint(requestUrl string) bool {
 	allowedEndpoints := []string{
 		"/prior_chatbot_api/api/v1/health/check",
 		"/prior_chatbot_api/api/v1/auth/sign-in",
+		"/prior_chatbot_api/api/v1/auth/sign-up",
 		"/prior_chatbot_api/api/v1/auth/regenerate-tokens",
 	}
 	for _, endpoint := range allowedEndpoints {

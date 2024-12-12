@@ -61,7 +61,7 @@ func (j *JwtTokenProvider) GenerateRefreshToken(value string) (string, error) {
 }
 
 func (j *JwtTokenProvider) DecodeTokenClaims(tokenString string) (jwt.MapClaims, error) {
-	log.Printf("Decoding token: %s\n", tokenString)
+	log.Printf("Decoding token")
 
 	// ตรวจสอบว่ามีการส่ง token มาหรือไม่
 	if tokenString == "" {
@@ -96,7 +96,7 @@ func (j *JwtTokenProvider) DecodeTokenClaims(tokenString string) (jwt.MapClaims,
 }
 
 func (j *JwtTokenProvider) ValidateToken(tokenString string) bool {
-	log.Printf("Validating token: %s\n", tokenString)
+	log.Printf("Validating token")
 	_, err := j.DecodeTokenClaims(tokenString)
 	if err != nil {
 		log.Printf("Invalid token: %s", err)

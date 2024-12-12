@@ -60,6 +60,8 @@ func StartEchoServer() {
 	}
 	cfg := configs.GetConfig()
 
+	configs.SetTimeZone(cfg.Server.TimeZone)
+
 	// Database connection
 	db := core.InitDb(cfg.DB.Host, cfg.DB.Port, cfg.Secrets.DbUsername, cfg.Secrets.DbPassword, cfg.DB.Database)
 	defer func() {
@@ -92,6 +94,12 @@ func StartEchoServer() {
 	}))
 	apiV1.GET("/auth/me", convertEchoHandler(func(c port.MyServer) {
 		handler.ExecuteHandlerMe(c, &cfg)
+	}))
+	apiV1.POST("/auth/regenerate-tokens", convertEchoHandler(func(c port.MyServer) {
+		handler.ExecuteHandlerRegenerateToken(c, &cfg)
+	}))
+	apiV1.POST("/auth/sign-up", convertEchoHandler(func(c port.MyServer) {
+		handler.ExecuteHandlerSignUp(c, &cfg)
 	}))
 
 	// Start server

@@ -38,3 +38,28 @@ func ExecuteHandlerMe(c port.MyServer, cfg *configs.Config) {
 	httpStatus, response := authService.Me(accessToken)
 	c.ToResponse(httpStatus, response.Code, response.Message, response.Data)
 }
+
+func ExecuteHandlerRegenerateToken(c port.MyServer, cfg *configs.Config) {
+	fmt.Println("ExecuteHandlerRegenerateToken")
+	jwtTokenProvider := authentication.NewJwtTokenProvider(cfg.JWT.Secret, cfg.JWT.ExpirationAccessToken, cfg.JWT.ExpirationRefreshToken)
+	authService := service.NewAuthService(c.GetRepo(), jwtTokenProvider)
+	refreshToken := c.GetRequest().Header.Get("Refresh-Token")
+	httpStatus, response := authService.RegenerateToken(refreshToken)
+	c.ToResponse(httpStatus, response.Code, response.Message, response.Data)
+
+}
+
+func ExecuteHandlerSignUp(c port.MyServer, cfg *configs.Config) {
+	fmt.Println("ExecuteHandlerSignUp")
+	jwtTokenProvider := authentication.NewJwtTokenProvider(cfg.JWT.Secret, cfg.JWT.ExpirationAccessToken, cfg.JWT.ExpirationRefreshToken)
+	authService := service.NewAuthService(c.GetRepo(), jwtTokenProvider)
+	var request model.UserSignUpRequest
+	err := c.BindRequest(&request) // Bind request
+	if err != nil {
+		c.ToResponse(http.StatusBadRequest, "I0001", "Invalid request", nil)
+		return
+	}
+	httpStatus, response := authService.SignUp(request)
+	c.ToResponse(httpStatus, response.Code, response.Message, response.Data)
+
+}
